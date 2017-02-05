@@ -10,11 +10,16 @@ ENV PIO_HOME /PredictionIO-${PIO_VERSION}
 ENV PATH=${PIO_HOME}/bin:$PATH
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
+ENV MAVEN_VERSION 3.3.9
 RUN apt-get update \
     && apt-get install -y --auto-remove --no-install-recommends curl openjdk-8-jdk libgfortran3 python-pip \
     && apt-get clean \
     && git unzip \
     && rm -rf /var/lib/apt/lists/*
+
+RUN curl -sSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /usr/share \
+  && mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven \
+  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
 RUN curl -O https://www.apache.org/dyn/closer.cgi/incubator/predictionio/${PIO_HOME}-incubating/apache-predictionio-${PIO_HOME}-incubating.tar.gz \
     && tar -xvzf PredictionIO-${PIO_VERSION}.tar.gz -C / && mkdir -p ${PIO_HOME}/vendors \
