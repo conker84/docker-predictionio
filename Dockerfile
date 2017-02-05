@@ -13,7 +13,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 RUN apt-get update \
     && apt-get install -y --auto-remove --no-install-recommends curl openjdk-8-jdk libgfortran3 python-pip \
     && apt-get clean \
-    && git unzip
+    && git unzip \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -O https://www.apache.org/dyn/closer.cgi/incubator/predictionio/${PIO_HOME}-incubating/apache-predictionio-${PIO_HOME}-incubating.tar.gz \
