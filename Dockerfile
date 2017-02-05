@@ -1,7 +1,7 @@
 FROM ubuntu
 MAINTAINER Fabian M. Borschel <fabian.borschel@commercetools.de>
 
-ENV PIO_VERSION 0.9.6
+ENV PIO_VERSION 0.10.0
 ENV SPARK_VERSION 1.5.1
 ENV ELASTICSEARCH_VERSION 1.4.4
 ENV HBASE_VERSION 1.0.0
@@ -13,9 +13,10 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 RUN apt-get update \
     && apt-get install -y --auto-remove --no-install-recommends curl openjdk-8-jdk libgfortran3 python-pip \
     && apt-get clean \
+    && git unzip
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -O https://d8k1yxp8elc6b.cloudfront.net/PredictionIO-${PIO_VERSION}.tar.gz \
+RUN curl -O https://www.apache.org/dyn/closer.cgi/incubator/predictionio/${PIO_HOME}-incubating/apache-predictionio-${PIO_HOME}-incubating.tar.gz \
     && tar -xvzf PredictionIO-${PIO_VERSION}.tar.gz -C / && mkdir -p ${PIO_HOME}/vendors \
     && rm PredictionIO-${PIO_VERSION}.tar.gz
 COPY files/pio-env.sh ${PIO_HOME}/conf/pio-env.sh
@@ -38,7 +39,10 @@ RUN sed -i "s|VAR_PIO_HOME|${PIO_HOME}|" ${PIO_HOME}/vendors/hbase-${HBASE_VERSI
     && sed -i "s|VAR_HBASE_VERSION|${HBASE_VERSION}|" ${PIO_HOME}/vendors/hbase-${HBASE_VERSION}/conf/hbase-site.xml
     
 RUN pip install --upgrade pip \
-    && pip install setuptools
+    && pip install setuptools \
+    && pip install predictionio
 
 #triggers fetching the complete sbt environment
 RUN ${PIO_HOME}/sbt/sbt -batch
+
+EXPOSE 8000 7070 9300
