@@ -16,13 +16,14 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /usr/share \
-  && mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven \
+RUN curl -sSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar xzf - -C /usr/share \
+  && mv /usr/share/apache-maven-${MAVEN_VERSION} /usr/share/maven \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
-RUN curl -O http://apache.panu.it/incubator/predictionio/${PIO_HOME}-incubating/apache-predictionio-${PIO_HOME}-incubating.tar.gz \
-    && tar -xvzf apache-predictionio-${PIO_HOME}-incubating.tar.gz -C / && mkdir -p ${PIO_HOME}/vendors \
-    && rm apache-predictionio-${PIO_HOME}-incubating.tar.gz
+RUN curl -O http://apache.panu.it/incubator/predictionio/${PIO_VERSION}-incubating/apache-predictionio-${PIO_VERSION}-incubating.tar.gz \
+    && tar -xvzf -C apache-predictionio-${PIO_VERSION}-incubating.tar.gz ${PIO_HOME} \
+    && mkdir -p ${PIO_HOME}/vendors \
+    && rm apache-predictionio-${PIO_VERSION}-incubating.tar.gz
 COPY files/pio-env.sh ${PIO_HOME}/conf/pio-env.sh
 
 RUN curl -O http://d3kbcqa49mib13.cloudfront.net/spark-${SPARK_VERSION}-bin-hadoop2.6.tgz \
