@@ -48,6 +48,6 @@ RUN pip install setuptools
 RUN pip install predictionio
 
 #triggers fetching the complete sbt environment
-RUN ${PIO_HOME}/sbt/sbt -batch
+#RUN ${PIO_HOME}/sbt/sbt -batch
 
 EXPOSE 8000 7070 9300
