@@ -6,7 +6,7 @@ ENV SPARK_VERSION 1.5.1
 ENV ELASTICSEARCH_VERSION 1.4.4
 ENV HBASE_VERSION 1.0.0
 
-ENV PIO_HOME /PredictionIO-${PIO_VERSION}
+ENV PIO_HOME /apache-predictionio-${PIO_VERSION}-incubating
 ENV PATH=${PIO_HOME}/bin:$PATH
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
@@ -20,10 +20,9 @@ RUN curl -sSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binari
   && mv /usr/share/apache-maven-${MAVEN_VERSION} /usr/share/maven \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
-WORKDIR ${PIO_HOME}
-RUN curl -O http://apache.panu.it/incubator/predictionio/${PIO_VERSION}-incubating/apache-predictionio-${PIO_VERSION}-incubating.tar.gz \
-    && tar -xvzf apache-predictionio-${PIO_VERSION}-incubating.tar.gz -C / && mkdir -p ${PIO_HOME}/vendors \
-    && rm apache-predictionio-${PIO_VERSION}-incubating.tar.gz
+RUN curl -O http://apache.panu.it/incubator/predictionio/${PIO_VERSION}-incubating/${PIO_HOME}.tar.gz \
+    && tar -xvzf ${PIO_HOME}.tar.gz -C / && mkdir -p ${PIO_HOME}/vendors \
+    && rm ${PIO_HOME}.tar.gz
 COPY files/pio-env.sh ${PIO_HOME}/conf/pio-env.sh
 
 RUN curl -O http://d3kbcqa49mib13.cloudfront.net/spark-${SPARK_VERSION}-bin-hadoop2.6.tgz \
