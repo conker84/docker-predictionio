@@ -47,9 +47,9 @@ RUN sed -i "s|VAR_PIO_HOME|${PIO_HOME}|" ${PIO_HOME}/vendors/hbase-${HBASE_VERSI
     
 RUN pip install --upgrade pip
 RUN pip install setuptools
-RUN pip install predictionio
+RUN pip install predictionio datetime
 
 #triggers fetching the complete sbt environment
-#RUN ${PIO_HOME}/sbt/sbt -batch
+RUN ${PIO_HOME}/make_distrbution.sh
 
 EXPOSE 8000 7070 9300
