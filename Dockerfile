@@ -25,7 +25,7 @@ RUN curl -O http://apache.panu.it/incubator/predictionio/${PIO_VERSION}-incubati
     && tar -xvzf apache-predictionio-${PIO_VERSION}-incubating.tar.gz \
     && mv apache-predictionio-${PIO_VERSION}-incubating ${PIO_HOME} \
     && mkdir -p ${PIO_HOME}/vendors \
-    && rm ${PIO_HOME}.tar.gz
+    && rm apache-predictionio-${PIO_VERSION}-incubating.tar.gz
 COPY files/pio-env.sh ${PIO_HOME}/conf/pio-env.sh
 
 RUN curl -O http://d3kbcqa49mib13.cloudfront.net/spark-${SPARK_VERSION}-bin-hadoop2.6.tgz \
