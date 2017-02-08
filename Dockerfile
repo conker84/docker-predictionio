@@ -13,7 +13,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 ENV MAVEN_VERSION 3.3.9
 RUN apt-get update \
-    && apt-get install -y --auto-remove --no-install-recommends curl openjdk-8-jdk libgfortran3 python-pip git unzip \
+    && apt-get install -y --auto-remove --no-install-recommends sudo curl openjdk-8-jdk libgfortran3 python-pip git unzip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
