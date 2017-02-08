@@ -23,7 +23,7 @@ RUN curl -sSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binari
 
 RUN curl -O http://apache.panu.it/incubator/predictionio/${PIO_VERSION}-incubating/apache-predictionio-${PIO_VERSION}-incubating.tar.gz \
     && tar -xvzf apache-predictionio-${PIO_VERSION}-incubating.tar.gz \
-    && mv apache-predictionio-${PIO_VERSION}-incubating ${PIO_HOME}
+    && mv apache-predictionio-${PIO_VERSION}-incubating ${PIO_HOME} \
     && mkdir -p ${PIO_HOME}/vendors \
     && rm ${PIO_HOME}.tar.gz
 COPY files/pio-env.sh ${PIO_HOME}/conf/pio-env.sh
