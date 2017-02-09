@@ -21,7 +21,7 @@ RUN curl -sSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binari
   && mv /usr/share/apache-maven-${MAVEN_VERSION} /usr/share/maven \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
-RUN curl -O https://www.dropbox.com/s/7noivmfx5ovz28s/apache-predictionio-${PIO_VERSION}-incubating.tar.gz?dl=0 \
+RUN curl -OL https://www.dropbox.com/s/7noivmfx5ovz28s/apache-predictionio-${PIO_VERSION}-incubating.tar.gz?dl=1 \
     && tar -xvzf apache-predictionio-${PIO_VERSION}-incubating.tar.gz \
     && mv apache-predictionio-${PIO_VERSION}-incubating ${PIO_HOME} \
     && mkdir -p ${PIO_HOME}/vendors \
